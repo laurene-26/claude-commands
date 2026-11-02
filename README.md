@@ -32,10 +32,10 @@ curl -o ~/.claude/commands/eod.md \
 
 curl -o ~/.claude/commands/kb-char-count.md \
   https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/kb-char-count.md
-curl -o ~/.claude/commands/hub-update.md \
-  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/hub-update.md
-curl -o ~/.claude/commands/hub-update-auto.md \
-  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/hub-update-auto.md
+curl -o ~/.claude/commands/status-update.md \
+  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/status-update.md
+curl -o ~/.claude/commands/status-update-auto.md \
+  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/status-update-auto.md
 
 # Skills
 mkdir -p ~/.claude/skills
@@ -63,8 +63,10 @@ Commands go in `~/.claude/commands/`. Invoke with `/command-name`.
 | KB Char Count | `/kb-char-count` | Count characters in every article across one or more KB export directories: per-article table sorted by size, plus per-KB totals and averages. Usage: `/kb-char-count <kb-dir> [kb-dir2] ...`. |
 | Session Start | `/session-start` | Start-of-session briefing for a project: reads the latest project memory, Linear status update, and Slack channel, then summarizes where things stand plus a suggested focus. Usage: `/session-start acme`. |
 | End of Day | `/eod` | End-of-day wrap for a project: updates project memory, logs a health update (green/yellow/red) to the csm-hub project, then drafts the daily update in the project's Slack channel (draft only). Linear is read-only. Usage: `/eod acme`. |
-| Hub Update | `/hub-update` | Brings the csm-hub up to date for a project. Reads the hub first, gathers context since your last update (this session, Slack, email, meetings, Linear, platform numbers), files each fact as health, touchpoint, note, task, risk or integration, checks for stale or conflicting facts, then **shows a preview and waits for your OK** before writing. Adds only, never deletes. Usage: `/hub-update acme`. |
-| Hub Update (auto) | `/hub-update-auto` | Same as `/hub-update` but writes the evidence-backed entries straight away and reports exactly what it wrote. Anything unclear or conflicting is listed as "needs your call" instead of written. Usage: `/hub-update-auto acme`. |
+| Status Update | `/status-update` | Brings the csm-hub up to date for a project. Reads the hub first, gathers context since your last update (this session, Slack, email, meetings, Linear, platform numbers), files each fact as health, touchpoint, note, task, risk or integration, checks for stale or conflicting facts, then **shows a preview (every hub write and the Slack message) and waits for your OK**. On your go it writes the hub and posts the health note to the project's Slack channel. Adds only, never deletes. Usage: `/status-update acme`. |
+| Status Update (auto) | `/status-update-auto` | Same as `/status-update` but writes the evidence-backed entries straight away and reports exactly what it wrote. Anything unclear or conflicting is listed as "needs your call" instead of written. It never sends to Slack: it leaves the health note as a **draft** in the project's channel for you to review and send. Usage: `/status-update-auto acme`. |
+
+> `/status-update` and `/status-update-auto` were called `/hub-update` and `/hub-update-auto`. They now update the hub and Slack, so the name says what they do. If you installed the old files, delete `~/.claude/commands/hub-update.md` and `hub-update-auto.md` and install the new ones.
 
 ### Install individually
 
@@ -96,12 +98,12 @@ curl -o ~/.claude/commands/eod.md \
   https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/eod.md
 
 # Hub Update (preview first)
-curl -o ~/.claude/commands/hub-update.md \
-  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/hub-update.md
+curl -o ~/.claude/commands/status-update.md \
+  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/status-update.md
 
 # Hub Update (automatic)
-curl -o ~/.claude/commands/hub-update-auto.md \
-  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/hub-update-auto.md
+curl -o ~/.claude/commands/status-update-auto.md \
+  https://raw.githubusercontent.com/shai-insait/claude-commands/main/.claude/commands/status-update-auto.md
 
 # KB Char Count
 curl -o ~/.claude/commands/kb-char-count.md \
